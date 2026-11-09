@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>谈案助手 · 实时会谈</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="./style.css?v=9">
+</head>
+<body>
+
+<div class="top">
+  <div class="brand"><span class="dot" id="dot" title="没在录音"></span>谈案助手<span class="sub" id="conn">连接中…</span><span class="recbadge" id="recState" hidden>录音中</span></div>
+
+  <select id="caseSel"></select>
+
+  <button class="btn primary" id="btnRec">开始录音</button>
+  <button class="btn" id="btnStop" disabled>停止</button>
+  <button class="btn ghost" id="btnImport">导入录音</button>
+  <button class="btn ghost" id="btnNew">新开一场</button>
+  <button class="btn ghost" id="btnHist">历史</button>
+  <button class="btn ghost" id="btnExport" title="把这一场的清单、提醒、全文导出成 Markdown">导出纪要</button>
+
+  <div class="player">
+    <span class="ico" id="playIco">▶ 回放</span>
+    <div class="track" id="track"><i id="played"></i><b id="head"></b></div>
+    <span class="timer" id="ptime">0:00</span>
+  </div>
+
+  <div class="vu" id="vu" title="麦克风电平"><i id="vuBar"></i></div>
+  <span class="spacer"></span>
+  <span class="timer" id="timer">00:00</span>
+</div>
+
+<div class="main">
+  <div class="col left">
+    <div class="colhead">必问清单<span class="count" id="leftCount"></span></div>
+    <div class="body" id="leftBody"></div>
+  </div>
+
+  <div class="col mid">
+    <div class="colhead">实时提醒<span class="count" id="midCount"></span></div>
+    <div class="body" id="midBody"></div>
+  </div>
+
+  <div class="col right">
+    <div class="colhead">转写参考<span class="count" id="rightCount"></span>
+      <button class="btn ghost mini" id="btnCopyAll" style="margin-left:8px">复制全文</button>
+      <button class="btn ghost mini" id="btnReveal" style="margin-left:8px" hidden>全部显示</button></div>
+    <div class="body" id="rightBody"></div>
+  </div>
+</div>
+
+<div class="status">
+  <span id="stModel">模型：—</span>
+  <span id="stSession"></span>
+  <span id="stChars">字数：0</span>
+  <span id="stCover">覆盖：0/0</span>
+  <span id="stImport"></span>
+  <span class="spacer" style="flex:1"></span>
+  <span id="stMsg"></span>
+</div>
+
+<div id="histPanel" class="hist" hidden></div>
+<div id="toast" class="toast"></div>
+<audio id="audio" preload="metadata"></audio>
+<input type="file" id="fileInput" accept="audio/*,video/*,.m4a,.mp4,.mov,.mkv,.wav,.mp3" hidden>
+
+<script src="./app.js?v=9"></script>
+</body>
+</html>

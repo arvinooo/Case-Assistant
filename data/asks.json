@@ -1,0 +1,433 @@
+{
+  "_说明": "话题 → 追问映射表。trigger 命中当前这段对话时，把 targets 里的清单项提到最前面（不论它们当前是什么状态）。权重用于排序：数字越大越优先。",
+  "loan": {
+    "topics": [
+      {
+        "id": "delivery_said",
+        "name": "刚提到交付方式",
+        "trigger": [
+          "转账",
+          "汇款",
+          "微信转",
+          "支付宝",
+          "现金",
+          "给的现金",
+          "打到"
+        ],
+        "targets": [
+          "loan_fact_iou",
+          "loan_fact_amount",
+          "loan_fact_time"
+        ],
+        "weight": 12
+      },
+      {
+        "id": "iou_said",
+        "name": "刚提到借条",
+        "trigger": [
+          "借条",
+          "欠条",
+          "打了条",
+          "写了个条",
+          "借据"
+        ],
+        "targets": [
+          "loan_evidence",
+          "loan_fact_guarantee",
+          "loan_interest_rate"
+        ],
+        "weight": 11
+      },
+      {
+        "id": "amount_said",
+        "name": "刚谈到金额",
+        "trigger": [
+          "万元",
+          "万块",
+          "万整",
+          "元",
+          "多少钱",
+          "本金"
+        ],
+        "targets": [
+          "loan_fact_delivery",
+          "loan_fact_time",
+          "loan_fact_iou"
+        ],
+        "weight": 11
+      },
+      {
+        "id": "overdue_said",
+        "name": "刚提到逾期不还",
+        "trigger": [
+          "没还",
+          "不还",
+          "拖了",
+          "逾期",
+          "到现在还"
+        ],
+        "targets": [
+          "loan_collection",
+          "loan_acknowledge",
+          "loan_limitation"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "collection_said",
+        "name": "刚提到催收",
+        "trigger": [
+          "催过",
+          "催了",
+          "打电话",
+          "发微信",
+          "要过钱",
+          "律师函"
+        ],
+        "targets": [
+          "loan_acknowledge",
+          "loan_limitation",
+          "loan_evidence"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "interest_said",
+        "name": "刚提到利息",
+        "trigger": [
+          "利息",
+          "利率",
+          "月息",
+          "年息",
+          "几分利"
+        ],
+        "targets": [
+          "loan_overdue_rate",
+          "loan_term",
+          "loan_fact_iou"
+        ],
+        "weight": 9
+      },
+      {
+        "id": "relation_said",
+        "name": "刚提到双方关系",
+        "trigger": [
+          "朋友",
+          "亲戚",
+          "表哥",
+          "表姐",
+          "同事",
+          "同学",
+          "老乡",
+          "熟人"
+        ],
+        "targets": [
+          "loan_subject_borrower",
+          "loan_subject_marriage",
+          "loan_fact_use"
+        ],
+        "weight": 7
+      },
+      {
+        "id": "marriage_said",
+        "name": "刚提到婚姻家庭",
+        "trigger": [
+          "老婆",
+          "老公",
+          "妻子",
+          "丈夫",
+          "结婚",
+          "离婚",
+          "家里"
+        ],
+        "targets": [
+          "loan_subject_marriage",
+          "loan_assets"
+        ],
+        "weight": 8
+      },
+      {
+        "id": "assets_said",
+        "name": "刚提到对方财产",
+        "trigger": [
+          "房子",
+          "车",
+          "存款",
+          "工资",
+          "上班",
+          "公司",
+          "生意"
+        ],
+        "targets": [
+          "loan_assets",
+          "loan_jurisdiction",
+          "loan_evidence"
+        ],
+        "weight": 8
+      },
+      {
+        "id": "court_said",
+        "name": "刚提到起诉或法院",
+        "trigger": [
+          "起诉",
+          "法院",
+          "立案",
+          "仲裁",
+          "律师函",
+          "保全"
+        ],
+        "targets": [
+          "loan_jurisdiction",
+          "loan_limitation",
+          "loan_evidence"
+        ],
+        "weight": 9
+      }
+    ],
+    "baseOrder": [
+      "loan_subject_lender",
+      "loan_subject_borrower",
+      "loan_subject_relation",
+      "loan_fact_amount",
+      "loan_fact_time",
+      "loan_fact_delivery",
+      "loan_fact_iou",
+      "loan_fact_use",
+      "loan_interest_rate",
+      "loan_term",
+      "loan_fact_guarantee",
+      "loan_repaid",
+      "loan_overdue_time",
+      "loan_collection",
+      "loan_overdue_rate",
+      "loan_acknowledge",
+      "loan_limitation",
+      "loan_subject_marriage",
+      "loan_evidence",
+      "loan_assets",
+      "loan_jurisdiction"
+    ]
+  },
+  "labor": {
+    "topics": [
+      {
+        "id": "term_said",
+        "name": "刚谈到解除方式",
+        "trigger": [
+          "辞退",
+          "开除",
+          "裁员",
+          "辞职",
+          "让我走",
+          "办离职",
+          "解除"
+        ],
+        "targets": [
+          "labor_term_reason",
+          "labor_handover",
+          "labor_arbitration"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "notice_said",
+        "name": "刚谈到解除通知",
+        "trigger": [
+          "通知书",
+          "书面",
+          "口头说",
+          "通知我",
+          "签了字",
+          "签字"
+        ],
+        "targets": [
+          "labor_discipline",
+          "labor_term_mode",
+          "labor_arbitration"
+        ],
+        "weight": 12
+      },
+      {
+        "id": "overtime_said",
+        "name": "刚谈到加班",
+        "trigger": [
+          "加班",
+          "调休",
+          "周末",
+          "加点",
+          "打卡",
+          "考勤"
+        ],
+        "targets": [
+          "labor_evidence",
+          "labor_annual_leave",
+          "labor_arrears"
+        ],
+        "weight": 11
+      },
+      {
+        "id": "wage_said",
+        "name": "刚谈到工资",
+        "trigger": [
+          "工资",
+          "月薪",
+          "发薪",
+          "绩效",
+          "提成",
+          "到手",
+          "税前",
+          "税后",
+          "底薪"
+        ],
+        "targets": [
+          "labor_avg_wage",
+          "labor_arrears",
+          "labor_wage_structure"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "arrears_said",
+        "name": "刚谈到拖欠",
+        "trigger": [
+          "没发",
+          "拖着",
+          "欠",
+          "不给钱",
+          "几个月没"
+        ],
+        "targets": [
+          "labor_arrears",
+          "labor_claims",
+          "labor_evidence"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "social_said",
+        "name": "刚谈到社保",
+        "trigger": [
+          "社保",
+          "五险",
+          "公积金",
+          "医保",
+          "养老"
+        ],
+        "targets": [
+          "labor_contract",
+          "labor_dates",
+          "labor_employer"
+        ],
+        "weight": 8
+      },
+      {
+        "id": "duration_said",
+        "name": "刚谈到在职时长",
+        "trigger": [
+          "入职",
+          "干了",
+          "年多",
+          "几年",
+          "入职那天",
+          "开始上班"
+        ],
+        "targets": [
+          "labor_dates",
+          "labor_avg_wage",
+          "labor_claims"
+        ],
+        "weight": 12
+      },
+      {
+        "id": "contract_said",
+        "name": "刚谈到劳动合同",
+        "trigger": [
+          "劳动合同",
+          "签合同",
+          "试用期",
+          "签了几年",
+          "没签合同"
+        ],
+        "targets": [
+          "labor_employer",
+          "labor_social",
+          "labor_post"
+        ],
+        "weight": 8
+      },
+      {
+        "id": "claim_said",
+        "name": "刚谈到诉求",
+        "trigger": [
+          "赔偿",
+          "补偿",
+          "想要",
+          "诉求",
+          "多少钱",
+          "赔我"
+        ],
+        "targets": [
+          "labor_claims",
+          "labor_evidence",
+          "labor_arbitration"
+        ],
+        "weight": 10
+      },
+      {
+        "id": "arbitration_said",
+        "name": "刚谈到仲裁",
+        "trigger": [
+          "仲裁",
+          "申请",
+          "起诉",
+          "法院",
+          "时效"
+        ],
+        "targets": [
+          "labor_arbitration",
+          "labor_evidence",
+          "labor_claims"
+        ],
+        "weight": 9
+      },
+      {
+        "id": "family_said",
+        "name": "刚谈到特殊情形",
+        "trigger": [
+          "怀孕",
+          "产假",
+          "工伤",
+          "生病",
+          "住院",
+          "医疗期"
+        ],
+        "targets": [
+          "labor_special",
+          "labor_dates",
+          "labor_term_reason"
+        ],
+        "weight": 9
+      }
+    ],
+    "baseOrder": [
+      "labor_employer",
+      "labor_post",
+      "labor_dates",
+      "labor_contract",
+      "labor_avg_wage",
+      "labor_wage_structure",
+      "labor_social",
+      "labor_term_mode",
+      "labor_term_reason",
+      "labor_discipline",
+      "labor_overtime",
+      "labor_arrears",
+      "labor_annual_leave",
+      "labor_handover",
+      "labor_claims",
+      "labor_evidence",
+      "labor_arbitration",
+      "labor_special"
+    ]
+  }
+}
